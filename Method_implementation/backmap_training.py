@@ -213,101 +213,6 @@ def dihedral_angles_loss(y_p,y_t,chain_da_list_1,chain_da_list_2,chain_da_list_3
     t_da = calc_da(t_chain_da_list_1,t_chain_da_list_2,t_chain_da_list_3)
     return MAE(t_da,p_da)   
 
-def calc_v0_SLS(output_tensor,input_tensor):
-  indx_b1 = tf.where(tf.equal(input_tensor[:,:,-1],1))[0::9]
-  indx_b2 = tf.where(tf.equal(input_tensor[:,:,-1],1))[1::9]
-  indx_b3 = tf.where(tf.equal(input_tensor[:,:,-1],1))[2::9]
-  indx_b4 = tf.where(tf.equal(input_tensor[:,:,-1],1))[3::9]
-  indx_b5 = tf.where(tf.equal(input_tensor[:,:,-1],1))[4::9]
-  indx_b6 = tf.where(tf.equal(input_tensor[:,:,-1],1))[5::9]
-  indx_b7 = tf.where(tf.equal(input_tensor[:,:,-1],1))[6::9]
-  indx_b8 = tf.where(tf.equal(input_tensor[:,:,-1],1))[7::9]
-  indx_b9 = tf.where(tf.equal(input_tensor[:,:,-1],1))[8::9]
-
-  b1_tensor = tf.gather_nd(output_tensor,indx_b1) 
-  b2_tensor = tf.gather_nd(output_tensor,indx_b2) 
-  b3_tensor = tf.gather_nd(output_tensor,indx_b3) 
-  b4_tensor = tf.gather_nd(output_tensor,indx_b4) 
-  b5_tensor = tf.gather_nd(output_tensor,indx_b5) 
-  b6_tensor = tf.gather_nd(output_tensor,indx_b6) 
-  b7_tensor = tf.gather_nd(output_tensor,indx_b7) 
-  b8_tensor = tf.gather_nd(output_tensor,indx_b8) 
-  b9_tensor = tf.gather_nd(output_tensor,indx_b9) 
-  masses = masses_SLS
-  totmass = np.sum(masses)
-
-  v0 = -((b1_tensor)*masses[5]+(b2_tensor)*masses[1]+(b2_tensor+b3_tensor)*masses[3]+(b2_tensor+b4_tensor)*masses[2]+(b2_tensor+b4_tensor+b5_tensor)*masses[4]+(b2_tensor+b4_tensor+b6_tensor)*masses[6]+(b2_tensor+b4_tensor+b6_tensor+b7_tensor)*masses[7]+(b2_tensor+b4_tensor+b6_tensor+b8_tensor)*masses[8]+(b2_tensor+b4_tensor+b6_tensor+b9_tensor)*masses[9])/totmass  
-  return v0
-
-
-def calc_v0_SLM(output_tensor,input_tensor):
-  indx_b0 = tf.where(tf.equal(input_tensor[:,:,-2],1))[0::9]
-  indx_b1 = tf.where(tf.equal(input_tensor[:,:,-2],1))[1::9]
-  indx_b2 = tf.where(tf.equal(input_tensor[:,:,-2],1))[2::9]
-  indx_b3 = tf.where(tf.equal(input_tensor[:,:,-2],1))[3::9]
-  indx_b4 = tf.where(tf.equal(input_tensor[:,:,-2],1))[4::9]
-  indx_b5 = tf.where(tf.equal(input_tensor[:,:,-2],1))[5::9]
-  indx_b6 = tf.where(tf.equal(input_tensor[:,:,-2],1))[6::9]
-  indx_b7 = tf.where(tf.equal(input_tensor[:,:,-2],1))[7::9]
-  indx_b8 = tf.where(tf.equal(input_tensor[:,:,-2],1))[8::9]
-
-  b0_tensor = tf.gather_nd(output_tensor,indx_b0) 
-  b1_tensor = tf.gather_nd(output_tensor,indx_b1) 
-  b2_tensor = tf.gather_nd(output_tensor,indx_b2) 
-  b3_tensor = tf.gather_nd(output_tensor,indx_b3) 
-  b4_tensor = tf.gather_nd(output_tensor,indx_b4) 
-  b5_tensor = tf.gather_nd(output_tensor,indx_b5) 
-  b6_tensor = tf.gather_nd(output_tensor,indx_b6) 
-  b7_tensor = tf.gather_nd(output_tensor,indx_b7) 
-  b8_tensor = tf.gather_nd(output_tensor,indx_b8) 
- 
-  masses = masses_SLM
-  totmass = np.sum(masses)
-
-  v0 = -((b0_tensor)*masses[0]+(b0_tensor+b1_tensor)*masses[1]+(b0_tensor+b1_tensor+b2_tensor)*masses[3]+(b0_tensor+b1_tensor+b3_tensor)*masses[2]+(b0_tensor+b1_tensor+b3_tensor+b4_tensor)*masses[4]+(b0_tensor+b1_tensor+b3_tensor+b5_tensor)*masses[5]+(b0_tensor+b1_tensor+b3_tensor+b5_tensor+b6_tensor)*masses[6]+(b0_tensor+b1_tensor+b3_tensor+b5_tensor+b7_tensor)*masses[7]+(b0_tensor+b1_tensor+b3_tensor+b5_tensor+b8_tensor)*masses[8])/totmass  
-  return v0
-
-def calc_v0_SLE(output_tensor,input_tensor):
-  indx_b0 = tf.where(tf.equal(input_tensor[:,:,-3],1))[0::11]
-  indx_b1 = tf.where(tf.equal(input_tensor[:,:,-3],1))[1::11]
-  indx_b2 = tf.where(tf.equal(input_tensor[:,:,-3],1))[2::11]
-  indx_b3 = tf.where(tf.equal(input_tensor[:,:,-3],1))[3::11]
-  indx_b4 = tf.where(tf.equal(input_tensor[:,:,-3],1))[4::11]
-  indx_b5 = tf.where(tf.equal(input_tensor[:,:,-3],1))[5::11]
-  indx_b6 = tf.where(tf.equal(input_tensor[:,:,-3],1))[6::11]
-  indx_b7 = tf.where(tf.equal(input_tensor[:,:,-3],1))[7::11]
-  indx_b8 = tf.where(tf.equal(input_tensor[:,:,-3],1))[8::11]
-  indx_b9 = tf.where(tf.equal(input_tensor[:,:,-3],1))[9::11]
-  indx_b10 = tf.where(tf.equal(input_tensor[:,:,-3],1))[10::11]
-  
-  b0_tensor = tf.gather_nd(output_tensor,indx_b0) 
-  b1_tensor = tf.gather_nd(output_tensor,indx_b1) 
-  b2_tensor = tf.gather_nd(output_tensor,indx_b2) 
-  b3_tensor = tf.gather_nd(output_tensor,indx_b3) 
-  b4_tensor = tf.gather_nd(output_tensor,indx_b4) 
-  b5_tensor = tf.gather_nd(output_tensor,indx_b5) 
-  b6_tensor = tf.gather_nd(output_tensor,indx_b6) 
-  b7_tensor = tf.gather_nd(output_tensor,indx_b7) 
-  b8_tensor = tf.gather_nd(output_tensor,indx_b8) 
-  b9_tensor = tf.gather_nd(output_tensor,indx_b9) 
-  b10_tensor = tf.gather_nd(output_tensor,indx_b10) 
-  
-  masses = masses_SLE
-  totmass = np.sum(masses)
-
-  v0 = -((b0_tensor)*masses[0]+(b0_tensor+b1_tensor)*masses[1]+(b0_tensor+b2_tensor+b1_tensor)*masses[3]+(b0_tensor+b1_tensor+b3_tensor)*masses[2]+(b0_tensor+b1_tensor+b3_tensor+b4_tensor)*masses[4]+(b0_tensor+b1_tensor+b3_tensor+b5_tensor)*masses[5]+(b0_tensor+b1_tensor+b3_tensor+b7_tensor)*masses[7]+(b0_tensor+b1_tensor+b3_tensor+b5_tensor+b6_tensor)*masses[6]+(b0_tensor+b1_tensor+b3_tensor+b7_tensor+b8_tensor)*masses[8]+(b0_tensor+b1_tensor+b3_tensor+b7_tensor+b9_tensor)*masses[9]+(b0_tensor+b1_tensor+b3_tensor+b7_tensor+b10_tensor)*masses[10])/totmass   
-  return v0
-
-def v0_loss(y_pred,y_true,x):
-    t_sls = calc_v0_SLS(y_true, x)
-    t_slm = calc_v0_SLM(y_true, x)
-    t_sle = calc_v0_SLE(y_true, x)
-   
-    p_sls = calc_v0_SLS(y_pred, x)
-    p_slm = calc_v0_SLM(y_pred, x)
-    p_sle = calc_v0_SLE(y_pred, x)
-    
-    return MAE(t_sls,p_sls) + MAE(t_slm,p_slm) + MAE(t_sle,p_sle)
 
 #Define the custom fit function
 class u_net(tf.keras.Model):
@@ -344,8 +249,8 @@ class u_net(tf.keras.Model):
             bl_loss = bond_lengths_loss(y_pred, y_true)
             ba_loss = bond_angles_loss(y_pred, y_true,chain_ba_list_1,chain_ba_list_2,chain_ba_sign_list_1,chain_ba_sign_list_2)
             da_loss = dihedral_angles_loss(y_pred, y_true,chain_da_list_1,chain_da_list_2,chain_da_list_3,chain_da_sign_list_1,chain_da_sign_list_2,chain_da_sign_list_3)
-            v_loss = v0_loss(y_pred, y_true, x)          
-            total_loss = lbv*reconstruction_loss + lbl*bl_loss + lba*ba_loss + lda*da_loss + lv0*v_loss
+          
+            total_loss = lbv*reconstruction_loss + lbl*bl_loss + lba*ba_loss + lda*da_loss
         grads = tape.gradient(total_loss, self.trainable_weights)
         self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
         self.total_loss_tracker.update_state(total_loss)
@@ -353,14 +258,12 @@ class u_net(tf.keras.Model):
         self.bl_loss_tracker.update_state(bl_loss)
         self.ba_loss_tracker.update_state(ba_loss)
         self.da_loss_tracker.update_state(da_loss)
-        self.v_loss_tracker.update_state(v_loss)
         return {
             "loss": self.total_loss_tracker.result(),
             "rec_loss": self.reconstruction_loss_tracker.result(),
             "bl_loss": self.bl_loss_tracker.result(),
             "ba_loss": self.ba_loss_tracker.result(),
             "da_loss": self.da_loss_tracker.result(),
-            "v_loss": self.v_loss_tracker.result(),
         
         }
 
@@ -371,14 +274,12 @@ class u_net(tf.keras.Model):
       val_bl_loss = bond_lengths_loss(val_pred, val_true)
       val_ba_loss = bond_angles_loss(val_pred, val_true,chain_ba_list_1,chain_ba_list_2,chain_ba_sign_list_1,chain_ba_sign_list_2)
       val_da_loss = dihedral_angles_loss(val_pred, val_true,chain_da_list_1,chain_da_list_2,chain_da_list_3,chain_da_sign_list_1,chain_da_sign_list_2,chain_da_sign_list_3)
-      val_v_loss = v0_loss(val_pred, val_true, val_x)
-      val_total_loss = lbv*val_reconstruction_loss + lbl*val_bl_loss + lba*val_ba_loss + lda*val_da_loss + lv0*val_v_loss
+      val_total_loss = lbv*val_reconstruction_loss + lbl*val_bl_loss + lba*val_ba_loss + lda*val_da_loss 
       return {"loss": val_total_loss,
               "rec_loss":val_reconstruction_loss,
               "bl_loss": val_bl_loss,
               "ba_loss": val_ba_loss,
               "da_loss": val_da_loss,
-              "v_loss": val_v_loss,
               }
         
 

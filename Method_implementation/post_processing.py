@@ -139,9 +139,9 @@ if __name__ == '__main__':
   ba_p = defaultdict(list)
   da_p = defaultdict(list)
 
-  bl_t = defaultdict(list)
-  ba_t = defaultdict(list)
-  da_t = defaultdict(list)
+  bl_o = defaultdict(list)
+  ba_o = defaultdict(list)
+  da_o = defaultdict(list)
  
   pool = multiprocessing.Pool(8)
   start_time = time.perf_counter()

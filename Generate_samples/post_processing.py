@@ -134,14 +134,11 @@ def plot_dists(frame_idx):
   ba_p = defaultdict(list)
   da_p = defaultdict(list)
 
-  bl_t = defaultdict(list)
-  ba_t = defaultdict(list)
-  da_t = defaultdict(list)
+  bl_o = defaultdict(list)
+  ba_o = defaultdict(list)
+  da_o = defaultdict(list)
    
   results = calc_dists(frame_idx,data)
-  pool.close()
-   
- 
 
   for i_dic in list(results[0]):
               bl_p[i_dic] += results[0][i_dic]
@@ -197,20 +194,11 @@ def plot_dists(frame_idx):
   totalC /= len(da_o) 
   totalC_z /= len(da_o)*180. 
   
-  nframes = len(frames)
-  totalA_z /= nframes 
-  totalB_z /= nframes
-  totalC_z /= nframes
   total_psi_z = totalA_z + totalB_z + totalC_z
-
-  totalA /= nframes 
-  totalB /= nframes
-  totalC /= nframes
   total_psi = totalA + totalB + totalC
 
-
-  print("AT psi_z:",epoch,float(totalA_z),float(totalB_z),float(totalC_z),float(total_psi_z))
-  print("AT psi:",epoch,float(totalA),float(totalB),float(totalC),float(total_psi))
+  print("AT psi_z:",float(totalA_z),float(totalB_z),float(totalC_z),float(total_psi_z))
+  print("AT psi:",float(totalA),float(totalB),float(totalC),float(total_psi))
 
 #Plot the distributions 
   os.mkdir("./bond_lengths")

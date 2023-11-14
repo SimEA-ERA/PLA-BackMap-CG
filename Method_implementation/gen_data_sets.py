@@ -12,7 +12,7 @@ import random
 import pickle
 
 #Load the trajectory of the system
-t = md.load('../Data/traj_copo45perc_5000frames.gro')
+t = md.load('../Data/traj_copo45perc_100frames.gro')
 print(t)
 
 
@@ -183,7 +183,7 @@ def encoding(frames,save_path):
             for g in range(dtseg):
                 frame_counter += 1
                 AT.append([tar_list[frame_counter][0],tar_list[frame_counter][1],tar_list[frame_counter][2]])
-                CG.append([imageCG[jj][0],imageCG[jj][1],imageCG[jj][2],m_id[0],m_id[1],m_id[2]])
+                CG.append([imageCG[jj][0],imageCG[jj][1],imageCG[jj][2],m_id[0],m_id[1],m_id[2],m_id[3]])
  
             if jj in meridx: 
                 c += 1
@@ -213,14 +213,14 @@ def encoding(frames,save_path):
 
 
 random.seed(100)
-frames = random.sample(range(5000), 5000)
+frames = random.sample(range(100), 100)
 
 save_path="train" 
-encoding(frames[:4000],save_path)
+encoding(frames[:80],save_path)
 
 save_path="val" 
-encoding(frames[4000:4500],save_path) 
+encoding(frames[80:90],save_path) 
 
 save_path="test" 
-encoding(frames[4500:],save_path) 
-print(frames[4500:])
+encoding(frames[90:],save_path) 
+print(frames[90:])
